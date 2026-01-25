@@ -41,36 +41,41 @@ This software is provided "as is", without warranty of any kind, express or impl
 
 # Project Case Study: Quantitative Portfolio Optimization Engine
 **1. Executive Summary**
+
 This project is a quantitative analysis tool designed to construct a mathematically optimal investment portfolio. Unlike traditional "rule of thumb" investing (e.g., the 60/40 split), this model utilizes Modern Portfolio Theory (MPT) and Convex Optimization to solve for the highest possible risk-adjusted return (Sharpe Ratio).
 
 The system targets a specific volatility profile (14% annualized risk) and validates the strategy by simulating 10,000 potential market futures over a 5-year horizon using Geometric Brownian Motion (GBM).
 
 **2. The Problem Statement**
-In public finance and urban economics, capital allocation is often driven by static assumptions. I wanted to apply dynamic, data-driven modeling to personal asset management to answer three key questions:
 
-Efficiency: Can we mathematically beat the standard market index by optimizing asset weights?
+I wanted to apply dynamic, data-driven modeling to personal asset management to answer three key questions:
 
-Risk Management: What is the statistical probability of loss over a 5-year period?
+a. Efficiency: Can we mathematically beat the standard market index by optimizing asset weights?
 
-Scenario Planning: How does a "Dollar Cost Averaging" (DCA) strategy perform under thousands of different market conditions?
+b. Risk Management: What is the statistical probability of loss over a 5-year period?
+
+c. Scenario Planning: How does a "Dollar Cost Averaging" (DCA) strategy perform under thousands of different market conditions?
 
 **3. Methodology & Asset Selection**
+
 The model constructs a "Super-Portfolio" using five distinct asset classes, each playing a specific role in the risk/reward ecosystem.
-The Growth Engines (Risk-On):
 
-SPYM (S&P 500): Provides core exposure to the US large-cap economy.
+a. The Growth Engines (Risk-On):
 
-QQQ (Nasdaq 100): Captures high-growth technology sector momentum.
+* SPYM (S&P 500): Provides core exposure to the US large-cap economy.
 
-VEA (Developed Markets): mitigating single-country geopolitical risk.
+* QQQ (Nasdaq 100): Captures high-growth technology sector momentum.
 
-The Hedges (Risk-Off):
+* VEA (Developed Markets): mitigating single-country geopolitical risk.
 
-TLT (Long-Term Treasuries): Acts as a deflationary hedge and negative-correlation asset during crashes.
+b. The Hedges (Risk-Off):
 
-GLDM (Gold): Provides a hedge against currency devaluation and inflationary pressure.
+* TLT (Long-Term Treasuries): Acts as a deflationary hedge and negative-correlation asset during crashes.
+
+* GLDM (Gold): Provides a hedge against currency devaluation and inflationary pressure.
 
 **4. The Optimization Engine (The "Brain")**
+
 The core of the project is a Python-based optimization algorithm (scipy.optimize). Instead of guessing weights, the model solves a mathematical problem:
 
 "Find the exact combination of these 5 assets that maximizes return, subject to the constraint that total Portfolio Volatility cannot exceed 14%."
@@ -79,36 +84,45 @@ This process plots the Efficient Frontier—the curve representing the best poss
 
 Constraints Applied: To prevent over-concentration (e.g., putting 100% into Tech), the model enforces "guardrails":
 
-No single asset can exceed 70%.
+a. No single asset can exceed 70%.
 
-Every asset must have at least a 2% allocation to ensure diversification.
+b. Every asset must have at least a 2% allocation to ensure diversification.
 
-The sum of weights must strictly equal 100%.
+c. The sum of weights must strictly equal 100%.
 
 **5. Monte Carlo Simulation (The "Stress Test")**
+
 Historical data is limited—it only shows us one version of the past. To understand the future, I implemented a Monte Carlo Simulation.
 
 This engine generates 10,000 theoretical future market paths based on the statistical properties (drift and standard deviation) of the optimized portfolio.
 
-Why this matters: In Real Estate and Urban Planning, we often deal with uncertainty. This simulation moves beyond "average returns" to look at tail risks—specifically, the 95% Value at Risk (VaR). It answers the critical question: "In the worst 5% of possible futures, is the portfolio still solvent?"
+Why this matters: In the real world, we often deal with uncertainty. This simulation moves beyond "average returns" to look at tail risks—specifically, the 95% Value at Risk (VaR). It answers the critical question: "In the worst 5% of possible futures, is the portfolio still solvent?"
 
 **6. Technology Stack & AI Integration**
+
 This project utilizes a modern, AI-assisted workflow:
 
-Language: Python (NumPy for matrix math, Pandas for data handling).
+a. Language: Python (NumPy for matrix math, Pandas for data handling).
 
-Data Source: Yahoo Finance API (Real-time adjusted close prices).
+b. Data Source: Yahoo Finance API (Real-time adjusted close prices).
 
-AI Implementation: Large Language Models (LLMs) were utilized to accelerate syntax generation and debug complex optimization constraints, allowing focus to remain on financial logic and architectural design rather than boilerplate coding.
+c. AI Implementation: Large Language Models (LLMs) were utilized to accelerate syntax generation and debug complex optimization constraints, allowing focus to remain on financial logic and architectural design rather than boilerplate coding.
 
 **7. Key Findings**
+
 The model rejected a balanced approach in favor of an aggressive growth strategy suitable for a long-time horizon (Student/Early Career profile):
 
-Optimal Allocation: Heavily weighted toward SPYM (~60%) and QQQ (~23%), with minor allocations to hedges.
+a. Optimal Allocation: Heavily weighted toward SPYM (~60%) and QQQ (~23%), with minor allocations to hedges.
 
-Projected Outcome: The simulation predicts a mean annualized return (CAGR) significantly outperforming a standard savings account, with a 95% probability of positive returns over a 5-year period.
+b. Projected Outcome: The simulation predicts a mean annualized return (CAGR) significantly outperforming a standard savings account, with a 95% probability of positive returns over a 5-year period.
 
 ==============================================================================================
 
 # Acknowledgments & Methodology 
-This project was developed using an AI-Assisted Workflow. The conceptual architecture, financial strategy, asset selection, and risk constraints were designed by the author. The underlying Python syntax and library implementation were generated via Large Language Models (Gemini), demonstrating a modern approach to rapid prototyping and financial modeling where technical execution is accelerated by AI. **This approach focuses on leveraging AI as a force multiplier for rapid prototyping and complex quantitative modeling.**
+This project was developed using an AI-Assisted Workflow. 
+
+The conceptual architecture, financial strategy, asset selection, and risk constraints were designed by the author. 
+
+The underlying Python syntax and library implementation were generated via Large Language Models (Gemini), demonstrating a modern approach to rapid prototyping and financial modeling where technical execution is accelerated by AI. 
+
+**This approach focuses on leveraging AI as a force multiplier for rapid prototyping and complex quantitative modeling.**
