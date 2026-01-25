@@ -13,15 +13,15 @@ Before running the script, open `portfolio_optimizer.py` and **find the configur
 ==============================================================================================
 
 # ⚠️ Disclaimer and Terms of Use
-1. Educational Purpose Only
+**1. Educational Purpose Only**
 
 This software is for educational and research purposes only. It is not intended to be a source of financial advice, and the authors are not registered financial advisors. The algorithms, simulations, and optimization techniques implemented herein are demonstrations of theoretical concepts (Modern Portfolio Theory, Geometric Brownian Motion) and should not be construed as a recommendation to buy, sell, or hold any specific security or asset class.
 
-2. No Financial Advice
+**2. Not a Financial Advice**
 
 Nothing in this repository constitutes professional financial, legal, or tax advice. Investment decisions should be made based on your own research and consultation with a qualified financial professional. The strategies modeled in this software may not be suitable for your specific financial situation, risk tolerance, or investment goals.
 
-3. Risk of Loss
+**3. Risk of Loss**
 
 All investments involve risk, including the possible loss of principal.
 
@@ -31,7 +31,7 @@ Simulation Limitations: Monte Carlo simulations are probabilistic models based o
 
 Market Data: Data fetched from third-party APIs (e.g., Yahoo Finance) may be delayed, inaccurate, or incomplete.
 
-4. "As-Is" Software Warranty
+**4. "As-Is" Software Warranty**
 
 This software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software.
 
