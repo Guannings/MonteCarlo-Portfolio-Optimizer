@@ -92,7 +92,7 @@ c. The sum of weights must strictly equal 100%.
 
 **5. Monte Carlo Simulation (The "Stress Test")**
 
-Historical data is limited—it only shows us one version of the past. To understand the future, I implemented a Monte Carlo Simulation.
+Historical data is limited—it only shows us one version of the past. To understand the future, the author implemented a Monte Carlo Simulation.
 
 This engine generates 10,000 theoretical future market paths based on the statistical properties (drift and standard deviation) of the optimized portfolio.
 
