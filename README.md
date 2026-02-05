@@ -128,3 +128,5 @@ This project was developed using an AI-Assisted Workflow.
 The underlying Python syntax and library implementation were generated via Large Language Models (Gemini), demonstrating a modern approach to rapid prototyping and financial modeling where technical execution is accelerated by AI. 
 
 **This approach focuses on leveraging AI as a force multiplier for rapid prototyping and complex quantitative modeling.**
+
+====================================================================================
