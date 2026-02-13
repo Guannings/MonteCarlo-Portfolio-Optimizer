@@ -10,7 +10,7 @@ This script is currently configured to run **1,000,000 (1 Million)** Monte Carlo
 
 **Recommendation for Standard Users:**
 
-If you were to run the script after carefully reading and agreed with the "⚠️ Disclaimer and Terms of Use" below, **before running**, open `portfolio_optimizer.py` and **find the configuration line: NUM_SIMULATIONS = 1000000** and **change it to 10000 or a smaller number of your choice.**
+If you were to run the script after carefully reading and agreed with the "⚠️ Disclaimer and Terms of Use" below, **before running**, open `latest_code.py` and **find the configuration line: NUM_SIMULATIONS = 1000000** and **change it to 10000 or a smaller number of your choice.**
 
 ====================================================================================
 
