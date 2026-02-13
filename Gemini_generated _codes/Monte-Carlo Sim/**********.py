@@ -13,14 +13,15 @@ def run_final_super_sim():
 
     core_stocks = ['SPYM', 'QQQ']
     new_stocks = ['VEA']
-    bonds = ['TLT']
+    bonds = ['AGG']
     gold = ['GLDM']
+    crypto = ['BTC-USD']
     all_stocks = core_stocks + new_stocks
-    all_tickers = all_stocks + bonds + gold
     n_stocks = len(all_stocks)
     n_bonds = len(bonds)
     n_gold = len(gold)
-    all_tickers = core_stocks + new_stocks + bonds + gold
+    n_crypto = len(crypto)
+    all_tickers = all_stocks + bonds + gold + crypto
     n_assets = len(all_tickers)
 
     print(f"Downloading data for {n_assets} assets...")
@@ -43,7 +44,7 @@ def run_final_super_sim():
     cov_matrix = returns.cov()
     mean_returns = returns.mean()
     rf_rate = 0.035
-    TARGET_VOL = 0.14
+    TARGET_VOL = 0.18
 
     # Objective: Maximize Return
     def get_return(weights):
@@ -60,8 +61,11 @@ def run_final_super_sim():
         # Macro Guardrails
         {'type': 'ineq', 'fun': lambda x: np.sum(x[:n_stocks]) - 0.50},  # Stocks Min 50%
         {'type': 'ineq', 'fun': lambda x: 0.96 - np.sum(x[:n_stocks])},  # Stocks Max 96%
-        {'type': 'ineq', 'fun': lambda x: np.sum(x[n_stocks : n_stocks+n_bonds]) - 0.02},  # Bonds Min 2%
-        {'type': 'ineq', 'fun': lambda x: np.sum(x[-n_gold]) - 0.02}  # Gold Min 2%
+        {'type': 'ineq', 'fun': lambda x: np.sum(x[n_stocks:n_stocks + n_bonds]) - 0.02},  # Bonds Min 2%
+        {'type': 'ineq', 'fun': lambda x: np.sum(x[n_stocks + n_bonds:n_stocks + n_bonds + n_gold]) - 0.02},
+        # Gold Min 2%
+        {'type': 'ineq', 'fun': lambda x: np.sum(x[-n_crypto:]) - 0.03},  # Crypto Min 3%
+        {'type': 'ineq', 'fun': lambda x: 0.08 - np.sum(x[-n_crypto:])}  # Crypto Max 8%
     ]
 
     # BOUNDS: Force 3% Min on ALL Stocks (Diversity) "No stock left behind"
@@ -71,11 +75,14 @@ def run_final_super_sim():
             # It is a Stock: Force 3% Minimum
             bounds.append((0.03, 0.96))
         elif i < n_stocks + n_bonds:
-            # It is a Bond: least 2% (but macro rule forces group total to 15%)
+            # It is a Bond: least 2%
+            bounds.append((0.02, 0.02))
+        elif i < n_stocks + n_bonds + n_gold:
+            # It is Gold: least 2%
             bounds.append((0.02, 0.02))
         else:
-            # It is Gold: least 2% (but macro rule forces group total to 5%)
-            bounds.append((0.02, 0.02))
+            # It is Crypto: 3% to 8%
+            bounds.append((0.03, 0.08))
     bounds = tuple(bounds)
 
     init_guess = [1 / n_assets] * n_assets
@@ -98,8 +105,10 @@ def run_final_super_sim():
             a_type = "New Recruit"
         elif t in bonds:
             a_type = "Bond"
-        else:
+        elif t in gold:
             a_type = "Gold"
+        elif t in crypto:
+            a_type = "Crypto"
 
         w = portfolio_weights[t]
         if w > 0.00000000000000000001:
@@ -190,6 +199,39 @@ def run_final_super_sim():
     plt.legend()
     plt.grid(axis='y', alpha=0.3)
     plt.show()
+
+    # 6. MONTHLY INVESTMENT BREAKDOWN
+    # !! IMPORTANT !!
+    # This is a placeholder value. Please change it to your actual monthly investment amount.
+    monthly_investment_twd = 8000
+
+    print("\n" + "=" * 55)
+    print(f"{'MONTHLY INVESTMENT PLAN (TWD)':^55}")
+    print(f"(Based on a total of {monthly_investment_twd:,.0f} TWD)")
+    print("=" * 55)
+    print(f"{'Ticker':<10} {'Asset Type':<15} {'Weight (%)':<12} {'Amount (TWD)'}")
+    print("-" * 55)
+
+    for t in all_tickers:
+        if t in core_stocks:
+            a_type = "Core Stock"
+        elif t in new_stocks:
+            a_type = "New Recruit"
+        elif t in bonds:
+            a_type = "Bond"
+        elif t in gold:
+            a_type = "Gold"
+        elif t in crypto:
+            a_type = "Crypto"
+
+        w = portfolio_weights[t]
+        investment_per_asset = monthly_investment_twd * w
+        if w > 0.00000000000000000001:
+            print(f"{t:<10} {a_type:<15} {w:>10.2%}      {investment_per_asset:,.0f} TWD")
+
+    print("=" * 55)
+    print("\nNOTE: As you mentioned, your broker may restrict trading for some assets like TLT and GLDM.")
+    print("You will need to decide how to handle those allocations.")
 
 
 if __name__ == "__main__":
