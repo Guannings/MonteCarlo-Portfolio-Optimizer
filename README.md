@@ -62,19 +62,25 @@ c. Scenario Planning: How does a "Dollar Cost Averaging" (DCA) strategy perform 
 
 The model constructs a Portfolio using five distinct asset classes, each playing a specific role in the risk/reward ecosystem.
 
-a. The Growth Engines (Risk-On):
+a. The Equity Growth Engine (Risk-On)
 
-* SPYM (S&P 500): Provides core exposure to the US large-cap economy.
+* SPYM (SPDR Portfolio S&P 500 ETF): Acts as the core anchor, providing broad exposure to the 500 largest US-listed companies.
 
-* QQQ (Nasdaq 100): Captures high-growth technology sector momentum.
+* QQQ (Invesco QQQ Trust): Targets high-growth technology and innovation sectors to capture market-leading momentum.
 
-* VEA (Developed Markets): mitigating single-country geopolitical risk.
+* VEA (Vanguard FTSE Developed Markets ETF): Serves as a "New Recruit" to mitigate single-country risk by providing exposure to established markets outside the US, such as Europe and Japan.
 
-b. The Hedges (Risk-Off):
+b. The Stability & Hedge Layer (Risk-Off)
 
-* TLT (Long-Term Treasuries): Acts as a deflationary hedge and negative-correlation asset during crashes.
+* AGG (iShares Core U.S. Aggregate Bond ETF): Provides a safety anchor and income through high-quality US investment-grade bonds, stabilizing the portfolio during equity volatility.
 
-* GLDM (Gold): Provides a hedge against currency devaluation and inflationary pressure.
+* GLDM (SPDR Gold MiniShares Trust): Functions as a classic inflation hedge and "store of value" during periods of currency devaluation or geopolitical uncertainty.
+
+c. The Digital Frontier (High-Alpha Speculation)
+
+* BTC-USD (Bitcoin): Introduced as a digital store of value and speculative growth asset.
+
+Risk Guardrail: To maintain professional risk standards, this model implements a strict 8% maximum cap on cryptocurrency allocation to prevent excessive exposure to digital asset volatility.
 
 **4. The Optimization Engine (The "Brain")**
 
