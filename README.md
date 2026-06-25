@@ -375,7 +375,9 @@ CAGR answers: **"If the portfolio grew at a perfectly steady rate each year, wha
 - Raising to the power $1/5$ = the "fifth root" (since this is a 5-year simulation). This finds the per-year multiplier. The fifth root of 2.0 is about 1.149.
 - $- 1$ = converts the multiplier into a percentage. $1.149 - 1 = 0.149$, or 14.9% per year.
 
-**Example:** \$100,000 grows to \$180,000 over 5 years. CAGR = $(1.8)^{0.2} - 1 \approx 0.125$ — about 12.5% per year.
+**Example:** \$100,000 grows to \$180,000 over 5 years.
+
+CAGR = $(1.8)^{0.2} - 1 \approx 0.125$ — about 12.5% per year.
 
 ```python
 sim_cagrs = (ending_values / total_val) ** (1 / 5) - 1
