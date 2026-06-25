@@ -144,7 +144,7 @@ Below is every formula the code uses, listed in the order they appear. No prior 
 
 $$r_t = \frac{P_t - P_{t-1}}{P_{t-1}}$$
 
-This measures how much an asset's price moved in one day, expressed as a fraction. If a stock was $100 yesterday and $102 today, the daily return is `(102 - 100) / 100 = 0.02`, which is 2%. If it dropped to $97, the return is `(97 - 100) / 100 = -0.03`, or -3%.
+This measures how much an asset's price moved in one day, expressed as a fraction. If a stock was \$100 yesterday and \$102 today, the daily return is `(102 - 100) / 100 = 0.02`, which is 2%. If it dropped to \$97, the return is `(97 - 100) / 100 = -0.03`, or -3%.
 
 The code computes this for every single day in the dataset, for all 6 assets at once. The result is a big table: each row is a date, each column is an asset, and every cell is that asset's return on that day.
 
@@ -299,8 +299,8 @@ This is where the simulation's core math begins. **Geometric Brownian Motion (GB
 The **drift** is the *average direction* the portfolio tends to move each day. But why subtract `0.5 × variance`? This is called the **Itô correction** (named after mathematician Kiyosi Itô), and it's the single most unintuitive part of the entire codebase. Here's the plain-English reason:
 
 Imagine a stock that goes +10% one day and -10% the next day. You might think you're back to even, but you're not:
-- Start with $100. Go up 10% → $110.
-- Go down 10% → $99. You **lost** $1.
+- Start with \$100. Go up 10% → \$110.
+- Go down 10% → \$99. You **lost** \$1.
 
 This asymmetry exists because percentage gains and losses are not symmetric — a 10% loss requires an 11.1% gain to recover. The bigger the swings (variance), the worse this "volatility drag" gets. The `- 0.5 × variance` term corrects for this drag so that the simulation accurately represents how compounding works in real markets. Without it, the simulation would systematically overestimate returns.
 
@@ -421,7 +421,7 @@ $$\text{CI}_{95\%} = \big[ P_{2.5}, \quad P_{97.5} \big]$$
 
 Imagine sorting all 1,000,000 ending values from smallest to largest. The **2.5th percentile** is the value at position 25,000 (2.5% of the way through the list) — only 2.5% of simulations did worse than this. The **97.5th percentile** is at position 975,000 — only 2.5% did better.
 
-Together, these two values capture the middle 95% of all outcomes, giving you a range: "In 95 out of 100 possible futures, the portfolio ends up somewhere between $X and $Y."
+Together, these two values capture the middle 95% of all outcomes, giving you a range: "In 95 out of 100 possible futures, the portfolio ends up somewhere between \$X and \$Y."
 
 ```python
 ci_lower_val = np.percentile(ending_values, 2.5)
@@ -478,7 +478,7 @@ Because bonds and gold are effectively pinned at their minimums (2% each) and cr
 
 **5. How Weights Are Output**
 
-After optimization, the script prints a detailed allocation table showing each asset's ticker, category (Core Stock, New Recruit, Bond, Gold, or Crypto), its optimized weight as a percentage, and the dollar value that weight represents on a $100,000 portfolio. Assets are grouped by their role so the user can immediately see the equity-heavy tilt vs. the hedge and crypto layers.
+After optimization, the script prints a detailed allocation table showing each asset's ticker, category (Core Stock, New Recruit, Bond, Gold, or Crypto), its optimized weight as a percentage, and the dollar value that weight represents on a \$100,000 portfolio. Assets are grouped by their role so the user can immediately see the equity-heavy tilt vs. the hedge and crypto layers.
 
 The script also produces a **Monthly Investment Breakdown** at the end. Given a user-defined monthly contribution (in TWD), it multiplies each asset's optimized weight by the monthly budget to show exactly how much to allocate per asset each month. This translates the abstract percentage weights into a concrete, actionable investment plan.
 
@@ -486,7 +486,7 @@ The script also produces a **Monthly Investment Breakdown** at the end. Given a 
 
 Historical data is limited—it only shows us one version of the past. To understand the range of possible futures, the author implemented a Monte Carlo Simulation.
 
-This engine generates **1,000,000** theoretical future market paths over 5 years. Each path uses Geometric Brownian Motion (GBM), starting from a $100,000 lump-sum investment and growing it daily based on the portfolio's statistical properties. The math behind the simulation is fully explained in Section 4a:
+This engine generates **1,000,000** theoretical future market paths over 5 years. Each path uses Geometric Brownian Motion (GBM), starting from a \$100,000 lump-sum investment and growing it daily based on the portfolio's statistical properties. The math behind the simulation is fully explained in Section 4a:
 
 - **Formulas 7–9** compute the portfolio's daily return, variance, and standard deviation from the optimized weights.
 - **Formula 10 (Drift)** adjusts the expected return downward to account for volatility drag (the Itô correction).
@@ -547,9 +547,9 @@ This can be rewritten as:
 
 $$r_t = \frac{P_t}{P_{t-1}} - 1$$
 
-Both forms say the same thing: "the new price divided by the old price, minus 1." If the price went from $100 to $103, the return is `103/100 - 1 = 0.03` (3%). If it dropped to $95, the return is `95/100 - 1 = -0.05` (-5%).
+Both forms say the same thing: "the new price divided by the old price, minus 1." If the price went from \$100 to \$103, the return is `103/100 - 1 = 0.03` (3%). If it dropped to \$95, the return is `95/100 - 1 = -0.05` (-5%).
 
-**Why use returns instead of raw prices?** Because returns are *scale-independent*. A $1 move on a $10 stock (10% return) is a much bigger deal than a $1 move on a $500 stock (0.2% return). Returns let us compare assets of different price levels on equal footing.
+**Why use returns instead of raw prices?** Because returns are *scale-independent*. A \$1 move on a \$10 stock (10% return) is a much bigger deal than a \$1 move on a \$500 stock (0.2% return). Returns let us compare assets of different price levels on equal footing.
 
 ---
 
@@ -915,17 +915,17 @@ This is the **CAGR formula**. It answers: "what constant annual rate would turn 
 
 ### Step 3: Application in the code
 
-With P₀ = $100,000, T = 5 years, and each simulation producing a different Pₜ:
+With P₀ = \$100,000, T = 5 years, and each simulation producing a different Pₜ:
 
 $$\text{CAGR} = \left(\frac{\text{ending value}}{100{,}000}\right)^{1/5} - 1$$
 
 **Worked example:**
-- Start: $100,000. End: $207,893.
+- Start: \$100,000. End: \$207,893.
 - Ratio: `207,893 / 100,000 = 2.07893`
 - Fifth root: `2.07893^0.2 = 1.1576`
 - CAGR: `1.1576 - 1 = 0.1576` = 15.76% per year
 
-This means $100,000 growing at a steady 15.76% for 5 years would reach $207,893.
+This means \$100,000 growing at a steady 15.76% for 5 years would reach \$207,893.
 
 ---
 
@@ -1020,7 +1020,7 @@ Together they form the **95% confidence interval**: the middle 95% of outcomes f
 
 $$\text{95\% CI} = \big[ P_{2.5}, \quad P_{97.5} \big]$$
 
-**Interpretation:** "We are 95% confident that the true outcome will fall within this range." Or equivalently: "In 950,000 out of 1,000,000 simulated futures, the portfolio ended up between $X and $Y."
+**Interpretation:** "We are 95% confident that the true outcome will fall within this range." Or equivalently: "In 950,000 out of 1,000,000 simulated futures, the portfolio ended up between \$X and \$Y."
 
 ### The relationship to the Normal distribution
 
