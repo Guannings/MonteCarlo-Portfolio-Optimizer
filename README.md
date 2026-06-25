@@ -375,7 +375,7 @@ CAGR answers: **"If the portfolio grew at a perfectly steady rate each year, wha
 - Raising to the power $1/5$ = the "fifth root" (since this is a 5-year simulation). This finds the per-year multiplier. The fifth root of 2.0 is about 1.149.
 - $- 1$ = converts the multiplier into a percentage. $1.149 - 1 = 0.149$, or 14.9% per year.
 
-**Example:** \$100,000 grows to \$180,000 over 5 years. CAGR $= (1.8)^{0.2} - 1 \approx 12.5\%$ per year.
+**Example:** \$100,000 grows to \$180,000 over 5 years. CAGR $= (1.8)^{0.2} - 1 \approx 12.5$% per year.
 
 ```python
 sim_cagrs = (ending_values / total_val) ** (1 / 5) - 1
@@ -417,7 +417,9 @@ port_std * np.sqrt(252)
 
 **Formula 17: 95% Confidence Interval (Percentiles)** ([lines 144–147](https://github.com/Guannings/MonteCarlo-Portfolio-Optimizer/blob/49b0e61/Gemini_generated%20_codes/Monte-Carlo%20Sim/latest_code.py#L144-L147))
 
-$$\text{CI}_{95\%} = \big[ P_{2.5}, \quad P_{97.5} \big]$$
+```math
+\text{CI}_{95\%} = \big[ P_{2.5}, \quad P_{97.5} \big]
+```
 
 Imagine sorting all 1,000,000 ending values from smallest to largest. The **2.5th percentile** is the value at position 25,000 (2.5% of the way through the list) — only 2.5% of simulations did worse than this. The **97.5th percentile** is at position 975,000 — only 2.5% did better.
 
